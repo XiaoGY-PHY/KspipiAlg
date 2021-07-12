@@ -56,6 +56,7 @@ private:
     
     // mc vectors
     NTuple::Item<int> index_temp0;
+    NTuple::Array<double> V4P_truth_Ks_temp0;
     NTuple::Array<double> V_P_pi_temp0;
     NTuple::Array<double> V_M_pi_temp0;
     NTuple::Array<double> V_Ks_temp0;

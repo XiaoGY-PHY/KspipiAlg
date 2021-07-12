@@ -95,6 +95,7 @@ StatusCode KspipiAlg::initialize()
 
             //vectors
             status = m_tuple0->addItem("index", index_temp0, 0, 10);
+            status = m_tuple0->addItem("V_truth_Ks", index_temp0, V4P_truth_Ks_temp0);
             status = m_tuple0->addIndexedItem("Vpi_P", index_temp0, V_P_pi_temp0);
             status = m_tuple0->addIndexedItem("Vpi_M", index_temp0, V_M_pi_temp0);
             status = m_tuple0->addIndexedItem("VKs", index_temp0, V_Ks_temp0);
@@ -181,6 +182,7 @@ StatusCode KspipiAlg::execute()
     //truth
     HepLorentzVector Ks_fposi;
     HepLorentzVector Ks_iposi;
+    HepLorentzVector Ks_4P;
     if (runNo < 0)
     {
         SmartDataPtr<Event::McParticleCol> mcParticleCol(eventSvc(), "/Event/MC/McParticleCol");
@@ -197,6 +199,7 @@ StatusCode KspipiAlg::execute()
                     //cout << ((*iter_mc)->mother()).particleProperty() << endl;
                     Ks_iposi = (*iter_mc)->initialPosition();
                     Ks_fposi = (*iter_mc)->finalPosition();
+                    Ks_4P = (*iter_mc)->initialFourMomentum();
                 }
                 // if ((*iter_mc)->particleProperty() == 443)
                 // {
@@ -614,6 +617,10 @@ StatusCode KspipiAlg::execute()
     truthdecayR0_temp0 = m_mcdecayR0;
     ncharge_temp0 = ncharge;
     index_temp0 = 4;
+    V4P_truth_Ks_temp0[0] = Ks_4P.px();
+    V4P_truth_Ks_temp0[1] = Ks_4P.py();
+    V4P_truth_Ks_temp0[2] = Ks_4P.pz();
+    V4P_truth_Ks_temp0[3] = Ks_4P.e();
 
     // decaychain
     for (int ntk_mc = 0; ntk_mc < idx_mc; ntk_mc++)
