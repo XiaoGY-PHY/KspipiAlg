@@ -1,0 +1,5 @@
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+ApplicationMgr.DLLs += {"KspipiAlg"};
+ApplicationMgr.TopAlg += {"KspipiAlg"};
+
+
