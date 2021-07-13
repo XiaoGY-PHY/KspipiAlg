@@ -276,6 +276,7 @@ StatusCode KspipiAlg::execute()
         double KsdecayLerr = -1000;
         int cutReason = -1000;
         double masscut = 9999;
+        double chisqcut = 9999;
         HepLorentzVector V_P_pi;
         HepLorentzVector V_M_pi;
         HepLorentzVector V_Ks;
@@ -546,9 +547,30 @@ StatusCode KspipiAlg::execute()
                 // }
                 //cout << "dddddddddddddddd! :: " << NNN << endl;
 
-                if (abs(pks_temp.m() - 0.497611) < masscut)
+                // *******************************************************************************************
+                //*********** mass cut ************************
+                //*************************************************************************************
+                // if (abs(pks_temp.m() - 0.497611) < masscut)
+                // {
+                //     masscut = abs(pks_temp.m() - 0.497611);
+                //     m2pi = (P_pip + P_pim).m();
+                //     mKs = pks_temp.m();
+                //     pks_temp.boost(-0.011, 0, 0);
+                //     V_Ks = pks_temp;
+                //     V_P_pi = P_pip;
+                //     V_M_pi = P_pim;
+                //     KsdecayL = len;
+                //     KsdecayLerr = lenerr;
+                //     cutReason = 0;
+                // }
+
+
+                //*******************************************************************
+                //*********************chisqcut*************************************
+                //*******************************************************************
+                if (svtxfit->chisq() < chisqcut)
                 {
-                    masscut = abs(pks_temp.m() - 0.497611);
+                    chisqcut = svtxfit->chisq();
                     m2pi = (P_pip + P_pim).m();
                     mKs = pks_temp.m();
                     pks_temp.boost(-0.011, 0, 0);
